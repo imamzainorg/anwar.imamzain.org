@@ -1,0 +1,43 @@
+---
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+
+const ICONS: Record<string, string> = {
+  hijri: 'calendar',
+  martyrs: 'star',
+  occasions: 'moon-star',
+  darkmode: 'moon',
+  wisdom: 'quote',
+  library: 'library',
+};
+const SOON: Record<Locale, string> = { ar: 'قريباً', en: 'Soon', fa: 'به‌زودی' };
+---
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><Icon name="sparkle" size={16} /> {c.brand.name}</span>
+      <h2 class="section-title">{c.featuresHeading.title}</h2>
+      <p class="lead">{c.featuresHeading.subtitle}</p>
+    </div>
+
+    <div class="feature-grid">
+      {c.features.map((f) => (
+        <article
+          class={`feature reveal${f.id === 'library' ? ' feature--soon' : ''}`}
+          data-soon={f.id === 'library' ? SOON[locale] : undefined}
+        >
+          <span class="feature__ic"><Icon name={ICONS[f.id] ?? 'sparkle'} /></span>
+          <h3>{f.title}</h3>
+          <p>{f.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

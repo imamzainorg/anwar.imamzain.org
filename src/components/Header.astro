@@ -1,0 +1,35 @@
+---
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+---
+<header class="site-header">
+  <div class="wrap site-header__row">
+    <a class="brand" href="#top" aria-label={c.brand.name}>
+      <Logo class="brand__mark" size={38} title={c.brand.name} />
+      <span class="brand__name">{c.brand.name}<small>{c.brand.nameLatin}</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#features">{c.nav.features}</a>
+      <a href="#content">{c.nav.content}</a>
+      <a href="#faq">{c.nav.faq}</a>
+    </nav>
+
+    <div class="header-actions">
+      <LangSwitch locale={locale} />
+      <a class="btn btn--primary btn--sm" href="#download">
+        <Icon name="download" size={17} />
+        <span>{c.nav.download}</span>
+      </a>
+    </div>
+  </div>
+</header>

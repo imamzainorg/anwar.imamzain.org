@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import { SCREENS } from '@/lib/screens';
+import StoreButtons from './StoreButtons.astro';
+import Qr from './Qr.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+---
+<section class="hero" id="download">
+  <div class="pattern"></div>
+  <div class="hero__glow"></div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow hero__eyebrow">{c.hero.eyebrow}</span>
+      <h1>{c.hero.title}</h1>
+      <p class="hero__sub">{c.hero.subtitle}</p>
+
+      <div class="hero__cta">
+        <StoreButtons locale={locale} onDark />
+        <p class="hero__hint"><Icon name="download" size={16} /> {c.hero.ctaHint}</p>
+      </div>
+
+      <div class="hero__chips">
+        <span class="chip"><Icon name="gift" /> {c.hero.freeLabel}</span>
+        <span class="chip"><Icon name="smartphone" /> {c.hero.platformsLabel}</span>
+        <span class="chip"><Icon name="shield-check" /> {c.trust.items[2].value}</span>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <Image
+        src={SCREENS.hero}
+        alt={c.alt.heroPhone}
+        widths={[240, 320, 400]}
+        sizes="(max-width: 940px) 60vw, 320px"
+        class="hero__phone phone--floaty"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero__qr">
+        <Qr locale={locale} caption={c.hero.scanHint} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero__phone {
+    inline-size: min(72vw, 300px);
+    height: auto;
+    rotate: -3deg;
+    filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.45));
+  }
+</style>

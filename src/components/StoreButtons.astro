@@ -1,0 +1,41 @@
+---
+/**
+ * The two store download badges. Both are always in the DOM (and in the JSON-LD)
+ * for SEO; a tiny head script tags <html> with is-ios / is-android / is-desktop
+ * and CSS then highlights the badge that matches the visitor's device and shows
+ * a "recommended" pill — the device-aware conversion nudge.
+ */
+import { SITE, type Locale } from '@/site.config';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+  onDark?: boolean;
+}
+const { locale } = Astro.props;
+
+const RECO: Record<Locale, string> = {
+  ar: 'موصى به لجهازك',
+  en: 'Recommended',
+  fa: 'پیشنهاد برای شما',
+};
+const LABELS: Record<Locale, { ios1: string; android1: string }> = {
+  ar: { ios1: 'حمّله من', android1: 'احصل عليه من' },
+  en: { ios1: 'Download on the', android1: 'Get it on' },
+  fa: { ios1: 'دریافت از', android1: 'دریافت از' },
+};
+const reco = RECO[locale];
+const l = LABELS[locale];
+---
+<div class="stores">
+  <a class="store-badge" data-store="ios" href={SITE.stores.ios} target="_blank" rel="noopener noreferrer" aria-label="App Store">
+    <span class="store-badge__reco"><Icon name="check" size={12} /> {reco}</span>
+    <Icon name="apple" class="store-badge__glyph" size={26} />
+    <span class="store-badge__text"><small>{l.ios1}</small><strong>App Store</strong></span>
+  </a>
+  <a class="store-badge" data-store="android" href={SITE.stores.android} target="_blank" rel="noopener noreferrer" aria-label="Google Play">
+    <span class="store-badge__reco"><Icon name="check" size={12} /> {reco}</span>
+    <Icon name="google-play" class="store-badge__glyph" size={24} />
+    <span class="store-badge__text"><small>{l.android1}</small><strong>Google Play</strong></span>
+  </a>
+</div>

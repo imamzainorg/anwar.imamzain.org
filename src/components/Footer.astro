@@ -1,0 +1,35 @@
+---
+import { SITE, type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+const year = 1447; // Hijri year of publication; kept static (no build-time clock)
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__top">
+      <div>
+        <a class="brand" href="#top" aria-label={c.brand.name}>
+          <Logo class="brand__mark" size={40} />
+          <span class="brand__name">{c.brand.name}<small>{c.brand.nameLatin}</small></span>
+        </a>
+        <p class="site-footer__tag">{c.footer.tagline}</p>
+      </div>
+      <div class="site-footer__links">
+        <a class="btn btn--on-dark btn--ghost btn--sm" href={SITE.stores.ios} target="_blank" rel="noopener noreferrer">App Store</a>
+        <a class="btn btn--on-dark btn--ghost btn--sm" href={SITE.stores.android} target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a class="btn btn--on-dark btn--ghost btn--sm" href={SITE.org.url} target="_blank" rel="noopener noreferrer">imamzain.org</a>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© {year} · {c.footer.rights}</span>
+      <LangSwitch locale={locale} />
+    </div>
+  </div>
+</footer>

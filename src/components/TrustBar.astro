@@ -1,0 +1,25 @@
+---
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+const icons = ['gift', 'sparkle', 'shield-check', 'moon'];
+---
+<section class="trust" aria-label="Trust">
+  <div class="wrap trust__grid">
+    {c.trust.items.map((item, i) => (
+      <div class="trust__item">
+        <span class="trust__ic"><Icon name={icons[i] ?? 'check'} /></span>
+        <span>
+          <span class="trust__v">{item.value}</span>
+          <span class="trust__l">{item.label}</span>
+        </span>
+      </div>
+    ))}
+  </div>
+</section>

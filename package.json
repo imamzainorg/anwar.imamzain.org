@@ -1,0 +1,24 @@
+{
+  "name": "anwar-sajjadiya",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone conversion landing page for the Anwar Sajjadiya mobile app (Imam Zayn al-Abidin as).",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "og": "node scripts/make-og.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.1",
+    "@fontsource-variable/vazirmatn": "^5.2.5",
+    "astro": "^5.13.5"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4",
+    "sharp": "^0.34.3"
+  }
+}

@@ -1,0 +1,40 @@
+---
+/** Reusable image + text band for a content module (rights / masnad / ziyarat). */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  icon: string;
+  image: ImageMetadata;
+  alt: string;
+  reversed?: boolean;
+  warm?: boolean;
+  tint?: boolean;
+}
+const { eyebrow, title, body, icon, image, alt, reversed = false, warm = false, tint = false } = Astro.props;
+---
+<section class={`section content-band${tint ? ' content-band--tint' : ''}`}>
+  <div class={`wrap split${reversed ? ' split--rev' : ''}`}>
+    <div class="split__media reveal">
+      <div class={`media-card${warm ? ' media-card--warm' : ''}`}>
+        <div class="pattern"></div>
+        <Image
+          src={image}
+          alt={alt}
+          widths={[360, 540, 720]}
+          sizes="(max-width: 900px) 88vw, 520px"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="split__copy reveal">
+      <span class="eyebrow"><Icon name={icon} size={16} /> {eyebrow}</span>
+      <h2 class="section-title">{title}</h2>
+      <p class="lead">{body}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+/** FAQ as native <details> — zero JS, keyboard-accessible, and mirrored in the
+ *  FAQPage JSON-LD for rich results. */
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+---
+<section class="section content-band content-band--tint" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title">{c.faqHeading}</h2>
+    </div>
+    <div class="faq">
+      {c.faq.map((item, i) => (
+        <details open={i === 0}>
+          <summary>
+            <span>{item.q}</span>
+            <Icon name="plus" class="faq__plus" size={20} />
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

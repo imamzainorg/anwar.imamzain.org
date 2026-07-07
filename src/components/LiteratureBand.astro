@@ -1,0 +1,34 @@
+---
+/**
+ * The biography / "Imam in Arabic literature" section, given an ornamental
+ * centered treatment (no screenshot) to vary the page rhythm and keep the
+ * payload light.
+ */
+import Logo from './Logo.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+}
+const { eyebrow, title, body } = Astro.props;
+---
+<section class="section lit">
+  <div class="pattern"></div>
+  <div class="wrap lit__inner reveal">
+    <Logo size={54} class="lit__mark" />
+    <span class="eyebrow lit__eyebrow">{eyebrow}</span>
+    <h2 class="section-title">{title}</h2>
+    <p class="lead">{body}</p>
+  </div>
+</section>
+
+<style>
+  .lit { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--teal-900), var(--teal-700)); color: #fff; text-align: center; }
+  .lit .pattern { opacity: 0.16; }
+  .lit__inner { position: relative; z-index: 1; max-inline-size: 44rem; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .lit__mark { margin-block-end: 0.6rem; }
+  .lit__eyebrow { color: var(--gold-200); }
+  .lit__eyebrow::before { display: none; }
+  .lit .lead { color: rgba(255, 255, 255, 0.9); }
+</style>

@@ -1,0 +1,55 @@
+---
+/** Full single-page composition, shared by all three locale routes. */
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import { SCREENS } from '@/lib/screens';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import TrustBar from './TrustBar.astro';
+import Showcase from './Showcase.astro';
+import ContentSection from './ContentSection.astro';
+import LiteratureBand from './LiteratureBand.astro';
+import FeatureGrid from './FeatureGrid.astro';
+import Faq from './Faq.astro';
+import CtaBand from './CtaBand.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+const byId = Object.fromEntries(c.sections.map((s) => [s.id, s]));
+const rights = byId.rights;
+const masnad = byId.masnad;
+const ziyarat = byId.ziyarat;
+const sira = byId.sira;
+---
+<Header locale={locale} />
+<main id="main" tabindex="-1">
+  <Hero locale={locale} />
+  <TrustBar locale={locale} />
+  <Showcase locale={locale} />
+
+  <ContentSection
+    eyebrow={rights.eyebrow} title={rights.title} body={rights.body}
+    icon="scroll" image={SCREENS.rights} alt={c.alt.rightsPhone}
+  />
+  <ContentSection
+    eyebrow={masnad.eyebrow} title={masnad.title} body={masnad.body}
+    icon="quote" image={SCREENS.masnad} alt={c.alt.masnadPhone}
+    reversed tint
+  />
+  <ContentSection
+    eyebrow={ziyarat.eyebrow} title={ziyarat.title} body={ziyarat.body}
+    icon="landmark" image={SCREENS.ziyarat} alt={c.alt.ziyaratPhone}
+    warm
+  />
+
+  <LiteratureBand eyebrow={sira.eyebrow} title={sira.title} body={sira.body} />
+
+  <FeatureGrid locale={locale} />
+  <Faq locale={locale} />
+  <CtaBand locale={locale} />
+</main>
+<Footer locale={locale} />

@@ -1,0 +1,20 @@
+---
+/** Language switcher — plain anchor links, zero JS. Marks the active locale. */
+import { SITE, type Locale } from '@/site.config';
+import { localePath, LOCALE_LABEL, HTML_LANG } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+---
+<nav class="lang" aria-label="Language">
+  {SITE.locales.map((l) => (
+    <a
+      href={localePath(l)}
+      lang={HTML_LANG[l]}
+      hreflang={HTML_LANG[l]}
+      aria-current={l === locale ? 'true' : undefined}
+    >{LOCALE_LABEL[l]}</a>
+  ))}
+</nav>

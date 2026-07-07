@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/vazirmatn/index.css';
+import '@/styles/global.css';
+import { SITE, type Locale } from '@/site.config';
+import { DIR, HTML_LANG } from '@/i18n';
+import Seo from '@/components/Seo.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const dir = DIR[locale];
+const lang = HTML_LANG[locale];
+
+// Localized micro-strings used by the head script / skip link.
+const RECO: Record<Locale, string> = { ar: 'موصى به لجهازك', en: 'Recommended', fa: 'پیشنهاد برای شما' };
+const SKIP: Record<Locale, string> = { ar: 'تخطَّ إلى المحتوى', en: 'Skip to content', fa: 'پرش به محتوا' };
+---
+<!doctype html>
+<html lang={lang} dir={dir} class="is-desktop">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Seo locale={locale} />
+    {/* Device-aware conversion nudge + QR auto-forward. The class flip runs
+        before paint (no FOUC); the a11y enhancement waits for the DOM. Tiny,
+        dependency-free. */}
+    <script is:inline define:vars={{ ios: SITE.stores.ios, android: SITE.stores.android, reco: RECO[locale] }}>
+      (function () {
+        try {
+          var ua = navigator.userAgent || '';
+          var p = 'desktop';
+          if (/windows phone/i.test(ua)) p = 'desktop';
+          else if (/android/i.test(ua)) p = 'android';
+          else if (/iphone|ipod|ipad/i.test(ua)) p = 'ios';
+          else if (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1) p = 'ios';
+          var el = document.documentElement;
+          el.classList.remove('is-desktop', 'is-ios', 'is-android');
+          el.classList.add('is-' + p);
+          if (new URLSearchParams(location.search).get('go') === '1') {
+            if (p === 'ios') location.replace(ios);
+            else if (p === 'android') location.replace(android);
+          }
+          // Mirror the visual "recommended" cue into the accessibility tree.
+          if (p === 'ios' || p === 'android') {
+            document.addEventListener('DOMContentLoaded', function () {
+              var m = document.querySelector('.store-badge[data-store="' + p + '"]');
+              if (m) {
+                m.setAttribute('aria-current', 'true');
+                m.setAttribute('aria-label', m.getAttribute('aria-label') + ' — ' + reco);
+              }
+            });
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{SKIP[locale]}</a>
+    <span id="top"></span>
+    <slot />
+  </body>
+</html>

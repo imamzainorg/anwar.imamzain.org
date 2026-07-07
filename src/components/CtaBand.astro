@@ -1,0 +1,21 @@
+---
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import StoreButtons from './StoreButtons.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+---
+<section class="section cta-band">
+  <div class="pattern"></div>
+  <div class="wrap cta-band__inner reveal">
+    <h2>{c.finalCta.title}</h2>
+    <p>{c.finalCta.subtitle}</p>
+    <StoreButtons locale={locale} onDark />
+    <p class="hero__hint" style="justify-content:center;margin-top:1.1rem"><Icon name="gift" size={16} /> {c.hero.freeLabel} · {c.hero.platformsLabel}</p>
+  </div>
+</section>

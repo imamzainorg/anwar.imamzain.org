@@ -1,0 +1,40 @@
+---
+/** The Sahifa Sajjadiyya feature showcase — the flagship content module. */
+import { Image } from 'astro:assets';
+import { type Locale } from '@/site.config';
+import { CONTENT } from '@/i18n/content';
+import { SCREENS } from '@/lib/screens';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = CONTENT[locale];
+---
+<section class="section" id="content">
+  <div class="wrap split">
+    <div class="split__media reveal">
+      <div class="media-card">
+        <div class="pattern"></div>
+        <Image
+          src={SCREENS.sahifa}
+          alt={c.alt.sahifaPhone}
+          widths={[360, 540, 720]}
+          sizes="(max-width: 900px) 88vw, 520px"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="split__copy reveal">
+      <span class="eyebrow"><Icon name="book-open" size={16} /> {c.showcase.eyebrow}</span>
+      <h2 class="section-title">{c.showcase.title}</h2>
+      <p class="lead">{c.showcase.lead}</p>
+      <ul class="checklist">
+        {c.showcase.bullets.map((b) => (
+          <li><Icon name="check" /> <span>{b}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
