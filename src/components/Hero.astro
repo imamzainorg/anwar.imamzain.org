@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets';
 import { type Locale } from '@/site.config';
 import { CONTENT } from '@/i18n/content';
 import { SCREENS } from '@/lib/screens';
 import StoreButtons from './StoreButtons.astro';
+import PhoneFrame from './PhoneFrame.astro';
 import Qr from './Qr.astro';
 import Icon from './Icon.astro';
 
@@ -35,12 +35,12 @@ const c = CONTENT[locale];
     </div>
 
     <div class="hero__media">
-      <Image
-        src={SCREENS.hero}
+      <PhoneFrame
+        image={SCREENS.hero}
         alt={c.alt.heroPhone}
-        widths={[240, 320, 400]}
-        sizes="(max-width: 940px) 60vw, 320px"
-        class="hero__phone phone--floaty"
+        class="device--hero device--floaty"
+        widths={[280, 420, 560]}
+        sizes="(max-width: 940px) 62vw, 288px"
         loading="eager"
         fetchpriority="high"
       />
@@ -50,12 +50,3 @@ const c = CONTENT[locale];
     </div>
   </div>
 </section>
-
-<style>
-  .hero__phone {
-    inline-size: min(72vw, 300px);
-    height: auto;
-    rotate: -3deg;
-    filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.45));
-  }
-</style>

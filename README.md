@@ -21,9 +21,11 @@ Its single job is to convert visitors into app downloads.
   store as the primary button with a "recommended" pill; desktop additionally shows
   a **scan‑to‑download QR** (generated at build time, no client JS). Scanning it on a
   phone (`?go=1`) forwards straight to the correct store.
-- **Brand identity from the app.** Deep teal `#006654` + gold `#bb9661`, a
-  Rub‑el‑Hizb octagram mark ("أنوار" = lights), subtle Islamic geometry, light & dark
-  themes mirroring the app.
+- **Brand identity from the app.** Warm cream surfaces, gold `#b8935a` as the primary
+  accent, charcoal `#2b2822` bars/CTA and the logo's emerald `#007062` as an accent —
+  with the app's real emerald‑and‑gold logo (extracted from the app, transparent).
+  Frameless app screenshots are shown in CSS device mockups; subtle Islamic geometry;
+  light & dark themes mirroring the app.
 
 ## Develop
 
@@ -45,7 +47,7 @@ npm run preview
 
 ## Social / icon assets
 
-`public/og/{ar,en,fa}.jpg` (1200×630) and `public/apple-touch-icon.png` are
+`public/og/{ar,en,fa}.jpg` (1200×630), `public/apple-touch-icon.png` and `public/favicon.png` are
 pre‑generated (committed) — regenerate after a brand/screenshot change:
 
 ```bash

@@ -1,12 +1,19 @@
 /**
- * Central map of app screenshots → keyed by the place they appear. Imported as
- * ImageMetadata so `astro:assets` can emit optimized, responsive AVIF/WebP.
- * All source PNGs already include a rendered device frame.
+ * Central map of app screenshots (current design) → keyed by the place they
+ * appear. Imported as ImageMetadata so `astro:assets` can emit optimized,
+ * responsive AVIF/WebP. Source PNGs are frameless full-screen captures; they are
+ * wrapped in a CSS device bezel by <PhoneFrame>.
  */
-import hero from '@/assets/screens/03.png';
-import sahifa from '@/assets/screens/05.png';
-import rights from '@/assets/screens/06.png';
-import masnad from '@/assets/screens/04.png';
-import ziyarat from '@/assets/screens/07.png';
+import home from '@/assets/screens/home.png';
+import sahifa from '@/assets/screens/sahifa.png';
+import heritage from '@/assets/screens/heritage.png';
+import literature from '@/assets/screens/literature.png';
+import ziyarat from '@/assets/screens/ziyarat.png';
 
-export const SCREENS = { hero, sahifa, rights, masnad, ziyarat } as const;
+export const SCREENS = {
+  hero: home, // home screen
+  sahifa, // Sahifa reading + word explanation
+  rights: heritage, // "Imam's heritage" hub (lists Risalat al-Huquq, Musnad…)
+  masnad: literature, // a text reading page
+  ziyarat, // Ziyarat list
+} as const;

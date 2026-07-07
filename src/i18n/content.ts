@@ -170,8 +170,8 @@ const ar: Content = {
   alt: {
     heroPhone: 'الشاشة الرئيسية لتطبيق أنوار سجادية تعرض أقسام الموسوعة عن الإمام زين العابدين (عليه السلام)',
     sahifaPhone: 'شاشة الصحيفة السجادية في التطبيق تعرض نصاً مشكولاً مع تمييز الآيات القرآنية باللون الأخضر',
-    masnadPhone: 'شاشة مسند الإمام تعرض أحاديث الإمام زين العابدين (عليه السلام) في موسوعة واحدة',
-    rightsPhone: 'شاشة رسالة الحقوق تعرض نص الرسالة بوضوح مع خياري المشاركة والحفظ في المفضّلة',
+    masnadPhone: 'شاشة قراءة نصّ داخل تطبيق أنوار سجادية بخطّ واضح وأدوات للتحكّم بالقراءة',
+    rightsPhone: 'شاشة «تراث الإمام» تعرض أقسام الصحيفة السجادية ورسالة الحقوق ومسند الإمام وغيرها',
     ziyaratPhone: 'شاشة زيارات الإمام تعرض قائمة الزيارات الخاصة والعامة للإمام زين العابدين (عليه السلام)',
     siraPhone: 'شاشة السيرة العطرة تعرض حياة الإمام زين العابدين (عليه السلام) وباب الإمام في الأدب العربي',
     appIcon: 'أيقونة تطبيق أنوار سجادية بخط عربي أنيق على خلفية داكنة',
@@ -302,8 +302,8 @@ const en: Content = {
   alt: {
     heroPhone: 'The home screen of the Anwar Sajjadiya app displaying the sections of the encyclopedia on Imam Zayn al-Abidin (peace be upon him)',
     sahifaPhone: "The Al-Sahifa Al-Sajjadiyya screen in the app displaying vowelized text with Qur'anic verses highlighted in green",
-    masnadPhone: "The Imam's Musnad screen displaying the narrations of Imam Zayn al-Abidin (peace be upon him) in a single encyclopedia",
-    rightsPhone: 'The Treatise on Rights screen displaying the text of the treatise clearly, with options to share and save to favorites',
+    masnadPhone: 'A text reading screen in the Anwar Sajjadiya app with clear typography and reading controls',
+    rightsPhone: "The 'Imam's Heritage' screen listing Al-Sahifa Al-Sajjadiyya, the Treatise on Rights, the Musnad and more",
     ziyaratPhone: "The Imam's Ziyarat screen displaying the list of specific and general Ziyarat of Imam Zayn al-Abidin (peace be upon him)",
     siraPhone: 'The Blessed Biography screen displaying the life of Imam Zayn al-Abidin (peace be upon him) and the section on the Imam in Arabic Literature',
     appIcon: 'The Anwar Sajjadiya app icon in elegant Arabic calligraphy on a dark background',
@@ -434,8 +434,8 @@ const fa: Content = {
   alt: {
     heroPhone: 'صفحهٔ اصلی اپلیکیشن انوار سجادیه که بخش‌های دانشنامهٔ امام زین‌العابدین (علیه‌السلام) را نمایش می‌دهد',
     sahifaPhone: 'صفحهٔ صحیفهٔ سجادیه در اپلیکیشن که متنی اعراب‌گذاری‌شده را همراه با متمایزسازی آیات قرآنی به رنگ سبز نمایش می‌دهد',
-    masnadPhone: 'صفحهٔ مسند امام که احادیث امام زین‌العابدین (علیه‌السلام) را در یک دانشنامهٔ واحد نمایش می‌دهد',
-    rightsPhone: 'صفحهٔ رسالهٔ حقوق که متن رساله را به‌روشنی همراه با گزینه‌های اشتراک‌گذاری و ذخیره در علاقه‌مندی‌ها نمایش می‌دهد',
+    masnadPhone: 'صفحهٔ مطالعهٔ متن در اپلیکیشن انوار سجادیه با خطی خوانا و ابزارهای کنترل مطالعه',
+    rightsPhone: 'صفحهٔ «میراث امام» که بخش‌های صحیفهٔ سجادیه، رسالهٔ حقوق و مسند امام را نمایش می‌دهد',
     ziyaratPhone: 'صفحهٔ زیارات امام که فهرست زیارات خاص و عام امام زین‌العابدین (علیه‌السلام) را نمایش می‌دهد',
     siraPhone: 'صفحهٔ سیرهٔ عطرآگین که زندگانی امام زین‌العابدین (علیه‌السلام) و بخش امام در ادب عربی را نمایش می‌دهد',
     appIcon: 'آیکون اپلیکیشن انوار سجادیه با خط عربی زیبا بر پس‌زمینه‌ای تیره',

@@ -1,0 +1,31 @@
+---
+/**
+ * Wraps a frameless app screenshot in a CSS device bezel (with a dynamic-island
+ * pill). The screenshots are full-screen captures, so the frame gives them a
+ * polished "app on a phone" look. Image is optimized/responsive via astro:assets.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'auto';
+}
+const {
+  image,
+  alt,
+  class: klass,
+  widths = [280, 420, 560],
+  sizes = '(max-width: 940px) 66vw, 280px',
+  loading = 'lazy',
+  fetchpriority,
+} = Astro.props;
+---
+<div class:list={['device', klass]}>
+  <Image src={image} alt={alt} widths={widths} sizes={sizes} loading={loading} fetchpriority={fetchpriority} />
+</div>

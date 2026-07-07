@@ -21,3 +21,6 @@ npm-debug.log*
 # os / editor
 .DS_Store
 Thumbs.db
+
+# raw app screenshots kept as design reference (not shipped)
+app-screenshots/

@@ -1,57 +1,68 @@
 /**
  * Generate static social/share assets with sharp (run once, committed to
  * /public — NOT part of the Vercel build, so no font/runtime fragility there):
- *   - public/og/{ar,en,fa}.jpg  — 1200x630 Open Graph cover
+ *   - public/og/{ar,en,fa}.jpg    — 1200x630 Open Graph cover
  *   - public/apple-touch-icon.png — 180x180 iOS home-screen icon
+ *   - public/favicon.png          — 64x64 browser tab icon
  *
  *   node scripts/make-og.mjs
+ *
+ * Uses the real extracted logo (src/assets/logo.png, transparent) and the
+ * current home screenshot (src/assets/screens/home.png).
  */
 import sharp from 'sharp';
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const P = (p) => resolve(root, p);
 
-const TEAL = '#006654';
-const TEAL_900 = '#00241d';
+const CHARCOAL = '#2b2822';
+const CHARCOAL_900 = '#17140f';
+const CREAM = '#f2efe8';
 const GOLD_A = '#d8b878';
 const GOLD_B = '#a97f45';
 
-const markSvg = (cx, cy, s) => `
-  <g transform="translate(${cx - s / 2}, ${cy - s / 2}) scale(${s / 48})">
-    <g stroke="url(#gold)" stroke-width="1.6" stroke-linecap="round" opacity="0.9">
-      <path d="M24 3v3M24 42v3M3 24h3M42 24h3M9 9l2.2 2.2M36.8 36.8 39 39M39 9l-2.2 2.2M11.2 36.8 9 39"/>
-    </g>
-    <g fill="url(#gold)">
-      <polygon points="24,7 41,24 24,41 7,24"/>
-      <polygon points="12,12 36,12 36,36 12,36"/>
-    </g>
-    <polygon points="24,13 35,24 24,35 13,24" fill="${TEAL_900}"/>
-    <polygon points="24,16.5 31.5,24 24,31.5 16.5,24" fill="url(#gold)"/>
-    <circle cx="24" cy="24" r="2.4" fill="${TEAL_900}"/>
-  </g>`;
+const LOGO = P('src/assets/logo.png');
+const HOME = P('src/assets/screens/home.png');
+
+const roundedRectSvg = (w, h, r, fill) =>
+  Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${r}" ry="${r}" fill="${fill}"/></svg>`);
+
+/** Screenshot with rounded corners (via a dest-in mask). */
+async function roundedImage(src, targetH, radius) {
+  const img = await sharp(src).resize({ height: targetH }).png().toBuffer();
+  const { width, height } = await sharp(img).metadata();
+  return {
+    buffer: await sharp(img)
+      .composite([{ input: roundedRectSvg(width, height, radius, '#fff'), blend: 'dest-in' }])
+      .png()
+      .toBuffer(),
+    width,
+    height,
+  };
+}
 
 function ogBackground() {
   return Buffer.from(`
   <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
     <defs>
       <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#01705c"/>
-        <stop offset="0.55" stop-color="${TEAL}"/>
-        <stop offset="1" stop-color="${TEAL_900}"/>
+        <stop offset="0" stop-color="#3a352b"/>
+        <stop offset="0.55" stop-color="${CHARCOAL}"/>
+        <stop offset="1" stop-color="${CHARCOAL_900}"/>
       </linearGradient>
       <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="${GOLD_A}"/>
         <stop offset="1" stop-color="${GOLD_B}"/>
       </linearGradient>
-      <radialGradient id="glow" cx="0.75" cy="0.2" r="0.6">
-        <stop offset="0" stop-color="${GOLD_A}" stop-opacity="0.38"/>
+      <radialGradient id="glow" cx="0.78" cy="0.15" r="0.6">
+        <stop offset="0" stop-color="${GOLD_A}" stop-opacity="0.36"/>
         <stop offset="1" stop-color="${GOLD_A}" stop-opacity="0"/>
       </radialGradient>
       <pattern id="rub" width="70" height="70" patternUnits="userSpaceOnUse">
-        <g fill="none" stroke="${GOLD_A}" stroke-width="1" opacity="0.14">
+        <g fill="none" stroke="${GOLD_A}" stroke-width="1" opacity="0.13">
           <rect x="21" y="21" width="28" height="28"/>
           <rect x="21" y="21" width="28" height="28" transform="rotate(45 35 35)"/>
         </g>
@@ -62,15 +73,13 @@ function ogBackground() {
     <rect width="1200" height="630" fill="url(#glow)"/>
     <rect x="0" y="0" width="1200" height="8" fill="url(#gold)"/>
 
-    ${markSvg(150, 150, 108)}
+    <text x="92" y="322" font-family="Segoe UI, Arial, sans-serif" font-size="84" font-weight="800" fill="#f7f2e8" letter-spacing="-1">Anwar Sajjadiya</text>
+    <text x="94" y="382" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="500" fill="#e7d5b1">The Complete Encyclopedia of Imam Zayn al-Abidin</text>
 
-    <text x="90" y="330" font-family="Segoe UI, Arial, sans-serif" font-size="86" font-weight="800" fill="#ffffff" letter-spacing="-1">Anwar Sajjadiya</text>
-    <text x="92" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="500" fill="#e9dcc2">The Complete Encyclopedia of Imam Zayn al-Abidin</text>
-
-    <g transform="translate(92, 448)">
-      <rect x="0" y="0" width="470" height="60" rx="30" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.22)"/>
+    <g transform="translate(94, 436)">
+      <rect x="0" y="0" width="470" height="60" rx="30" fill="rgba(255,255,255,0.08)" stroke="rgba(231,213,177,0.28)"/>
       <circle cx="34" cy="30" r="9" fill="url(#gold)"/>
-      <text x="60" y="39" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Free on App Store &amp; Google Play</text>
+      <text x="60" y="39" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#f7f2e8">Free on App Store &amp; Google Play</text>
     </g>
   </svg>`);
 }
@@ -79,14 +88,18 @@ async function buildOg() {
   await mkdir(P('public/og'), { recursive: true });
   const bg = await sharp(ogBackground()).png().toBuffer();
 
-  const phone = await sharp(P('src/assets/screens/03.png'))
-    .resize({ height: 560 })
-    .png()
-    .toBuffer();
-  const pmeta = await sharp(phone).metadata();
+  const logo = await sharp(LOGO).resize({ height: 96 }).png().toBuffer();
+  const phone = await roundedImage(HOME, 566, 42);
+  const bezel = roundedRectSvg(phone.width + 16, phone.height + 16, 50, CHARCOAL_900);
+  const phoneLeft = 1200 - phone.width - 96;
+  const phoneTop = Math.round((630 - phone.height) / 2);
 
   const cover = await sharp(bg)
-    .composite([{ input: phone, top: Math.round((630 - pmeta.height) / 2), left: 1200 - pmeta.width - 70 }])
+    .composite([
+      { input: bezel, top: phoneTop - 8, left: phoneLeft - 8 },
+      { input: phone.buffer, top: phoneTop, left: phoneLeft },
+      { input: logo, top: 66, left: 92 },
+    ])
     .jpeg({ quality: 82, mozjpeg: true })
     .toBuffer();
 
@@ -96,12 +109,16 @@ async function buildOg() {
   console.log(`OG cover written (${(cover.length / 1024).toFixed(0)} kB) → public/og/{ar,en,fa}.jpg`);
 }
 
-async function buildAppleIcon() {
-  const svg = await readFile(P('public/favicon.svg'));
-  const png = await sharp(svg).resize(180, 180).png().toBuffer();
-  await writeFile(P('public/apple-touch-icon.png'), png);
-  console.log('apple-touch-icon.png written (180x180)');
+async function buildIcon(size, out) {
+  const logoH = Math.round(size * 0.66);
+  const logo = await sharp(LOGO).resize({ height: logoH }).png().toBuffer();
+  const tile = sharp({ create: { width: size, height: size, channels: 4, background: CREAM } })
+    .composite([{ input: logo, gravity: 'center' }])
+    .png();
+  await writeFile(P(out), await tile.toBuffer());
+  console.log(`${out} written (${size}x${size})`);
 }
 
 await buildOg();
-await buildAppleIcon();
+await buildIcon(180, 'public/apple-touch-icon.png');
+await buildIcon(64, 'public/favicon.png');

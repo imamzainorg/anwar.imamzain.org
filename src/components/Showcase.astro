@@ -1,9 +1,9 @@
 ---
 /** The Sahifa Sajjadiyya feature showcase — the flagship content module. */
-import { Image } from 'astro:assets';
 import { type Locale } from '@/site.config';
 import { CONTENT } from '@/i18n/content';
 import { SCREENS } from '@/lib/screens';
+import PhoneFrame from './PhoneFrame.astro';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -17,13 +17,7 @@ const c = CONTENT[locale];
     <div class="split__media reveal">
       <div class="media-card">
         <div class="pattern"></div>
-        <Image
-          src={SCREENS.sahifa}
-          alt={c.alt.sahifaPhone}
-          widths={[360, 540, 720]}
-          sizes="(max-width: 900px) 88vw, 520px"
-          loading="lazy"
-        />
+        <PhoneFrame image={SCREENS.sahifa} alt={c.alt.sahifaPhone} sizes="(max-width: 900px) 58vw, 250px" />
       </div>
     </div>
     <div class="split__copy reveal">

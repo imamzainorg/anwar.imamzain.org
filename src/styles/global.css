@@ -1,31 +1,35 @@
 /* ============================================================================
    Anwar Sajjadiya — design system
-   Brand: deep teal (#006654) + gold (#bb9661), warm ivory paper, Islamic
-   geometry. Authored with CSS logical properties so a single sheet serves both
+   Brand (from the app UI): warm cream surfaces, gold as the primary accent,
+   charcoal for the dark bars/CTA, and the logo's emerald green as a secondary
+   accent. Authored with CSS logical properties so a single sheet serves both
    RTL (ar/fa) and LTR (en). Near-zero JS by design.
    ========================================================================== */
 
 :root {
   /* Brand */
-  --teal: #006654;
-  --teal-700: #004d3f;
-  --teal-900: #00332a;
-  --gold: #bb9661;
-  --gold-600: #a07c48;
-  --gold-200: #ecdcc0;
+  --green: #007062; /* logo emerald — secondary accent */
+  --green-700: #005a4f;
+  --green-900: #013f37;
+  --gold: #b8935a; /* primary accent */
+  --gold-600: #987640;
+  --gold-200: #e7d5b1;
+  --charcoal: #2b2822; /* app top/tab bars, CTA, footer */
+  --charcoal-800: #211e18;
+  --charcoal-900: #17140f;
 
   /* Neutrals (warm) */
-  --ink: #1b2521;
-  --muted: #566661;
-  --paper: #faf6ee;
-  --paper-2: #f3ecdd;
-  --card: #ffffff;
-  --line: rgba(27, 37, 33, 0.1);
-  --line-strong: rgba(27, 37, 33, 0.16);
+  --ink: #2b2822;
+  --muted: #6d6656;
+  --paper: #f2efe8;
+  --paper-2: #e9e3d4;
+  --card: #fbf9f3;
+  --line: rgba(43, 40, 34, 0.1);
+  --line-strong: rgba(43, 40, 34, 0.17);
 
   /* Effects */
-  --shadow-sm: 0 1px 2px rgba(0, 51, 42, 0.06), 0 8px 24px -16px rgba(0, 51, 42, 0.3);
-  --shadow-md: 0 2px 6px rgba(0, 51, 42, 0.08), 0 30px 60px -30px rgba(0, 51, 42, 0.35);
+  --shadow-sm: 0 1px 2px rgba(43, 40, 34, 0.06), 0 8px 24px -16px rgba(43, 40, 34, 0.28);
+  --shadow-md: 0 2px 6px rgba(43, 40, 34, 0.08), 0 30px 60px -30px rgba(43, 40, 34, 0.32);
   --radius: 18px;
   --radius-lg: 28px;
   --wrap: 1120px;
@@ -41,15 +45,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ink: #eaf2ee;
-    --muted: #a9bab3;
-    --paper: #0d1512;
-    --paper-2: #121d18;
-    --card: #16211c;
+    --ink: #efe9dc;
+    --muted: #b0a892;
+    --paper: #14120e;
+    --paper-2: #1c1a14;
+    --card: #201d16;
     --line: rgba(255, 255, 255, 0.1);
     --line-strong: rgba(255, 255, 255, 0.16);
-    --gold: #cda870;
-    --gold-200: #6b5836;
+    --gold: #cbab73;
+    --gold-200: #6f5a34;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
     --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.35), 0 30px 60px -30px rgba(0, 0, 0, 0.7);
   }
@@ -109,25 +113,25 @@ p { text-wrap: pretty; }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
-.btn--primary { background: var(--teal); color: #fff; box-shadow: 0 12px 26px -12px rgba(0, 102, 84, 0.7); }
-.btn--primary:hover { background: var(--teal-700); }
-.btn--gold { background: var(--gold); color: #23180a; box-shadow: 0 12px 26px -12px rgba(187, 150, 97, 0.75); }
-.btn--gold:hover { background: var(--gold-600); color: #fff; }
+.btn--primary { background: var(--gold); color: #241a09; box-shadow: 0 12px 26px -12px rgba(184, 147, 90, 0.8); }
+.btn--primary:hover { background: var(--gold-600); color: #fff; }
+.btn--green { background: var(--green); color: #fff; box-shadow: 0 12px 26px -12px rgba(0, 112, 98, 0.7); }
+.btn--green:hover { background: var(--green-700); }
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
-.btn--ghost:hover { border-color: var(--teal); color: var(--teal); }
+.btn--ghost:hover { border-color: var(--gold); color: var(--gold-600); }
 .btn--sm { padding: 0.55rem 1.05rem; font-size: var(--step--1); }
 .btn--on-dark.btn--ghost { color: #fff; border-color: rgba(255, 255, 255, 0.3); }
-.btn--on-dark.btn--ghost:hover { border-color: #fff; background: rgba(255, 255, 255, 0.08); color: #fff; }
+.btn--on-dark.btn--ghost:hover { border-color: var(--gold); background: rgba(255, 255, 255, 0.08); color: #fff; }
 
 /* ------------------------- store download badges ------------------------ */
 .stores { display: flex; flex-wrap: wrap; gap: 0.85rem; }
 .store-badge {
-  --bg: #0f1613; --fg: #fff;
+  --bg: #211e18; --fg: #fff;
   position: relative;
   display: inline-flex; align-items: center; gap: 0.7rem;
   padding: 0.62rem 1.15rem; border-radius: 14px;
   background: var(--bg); color: var(--fg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(184, 147, 90, 0.45);
   box-shadow: var(--shadow-sm);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -141,9 +145,9 @@ p { text-wrap: pretty; }
   position: absolute; inset-block-start: -0.7rem; inset-inline-end: 0.6rem;
   display: none; align-items: center; gap: 0.25rem;
   padding: 0.12rem 0.55rem; border-radius: 999px;
-  background: var(--gold); color: #23180a;
+  background: var(--gold); color: #241a09;
   font-size: 10.5px; font-weight: 800; letter-spacing: 0.01em;
-  box-shadow: 0 6px 14px -6px rgba(187, 150, 97, 0.9);
+  box-shadow: 0 6px 14px -6px rgba(184, 147, 90, 0.9);
 }
 html.is-ios .store-badge[data-store="ios"] .store-badge__reco,
 html.is-android .store-badge[data-store="android"] .store-badge__reco { display: inline-flex; }
@@ -151,7 +155,6 @@ html.is-ios .store-badge[data-store="ios"],
 html.is-android .store-badge[data-store="android"] {
   outline: 2px solid var(--gold); outline-offset: 2px; transform: translateY(-1px);
 }
-/* Emphasise the matching store first on small screens */
 @media (max-width: 560px) {
   html.is-ios .store-badge[data-store="ios"],
   html.is-android .store-badge[data-store="android"] { order: -1; }
@@ -163,9 +166,9 @@ html.is-android .store-badge[data-store="android"] {
 /* Rub-el-Hizb tile as an inline SVG data URI — a few bytes, no image request. */
 .pattern {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23bb9661' stroke-width='1'%3E%3Crect x='24' y='24' width='32' height='32'/%3E%3Crect x='24' y='24' width='32' height='32' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23b8935a' stroke-width='1'%3E%3Crect x='24' y='24' width='32' height='32'/%3E%3Crect x='24' y='24' width='32' height='32' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 80px 80px;
-  opacity: 0.12;
+  opacity: 0.1;
   -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 40%, transparent 85%);
   mask-image: radial-gradient(120% 100% at 50% 0%, #000 40%, transparent 85%);
 }
@@ -181,36 +184,36 @@ html.is-android .store-badge[data-store="android"] {
 .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; block-size: 4.2rem; }
 .nav { display: none; align-items: center; gap: 1.6rem; }
 .nav a { display: inline-flex; align-items: center; min-block-size: 44px; font-weight: 600; font-size: var(--step--1); color: var(--muted); }
-.nav a:hover { color: var(--teal); }
+.nav a:hover { color: var(--gold-600); }
 .header-actions { display: flex; align-items: center; gap: 0.6rem; }
 @media (min-width: 900px) { .nav { display: flex; } }
 
 /* brand lockup */
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 800; }
-.brand__mark { inline-size: 2.2rem; block-size: 2.2rem; flex: none; }
+.brand__mark { block-size: 2.4rem; inline-size: auto; flex: none; }
 .brand__name { font-size: var(--step-1); letter-spacing: -0.01em; }
 .brand__name small { display: block; font-size: 0.62em; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; }
 
 /* language switcher */
 .lang { display: inline-flex; align-items: center; gap: 0.15rem; padding: 0.2rem; border: 1px solid var(--line-strong); border-radius: 999px; }
 .lang a { display: inline-flex; align-items: center; min-block-size: 38px; padding: 0.4rem 0.7rem; border-radius: 999px; font-size: var(--step--1); font-weight: 700; color: var(--muted); line-height: 1; }
-.lang a[aria-current="true"] { background: var(--teal); color: #fff; }
-.lang a:hover:not([aria-current="true"]) { color: var(--teal); }
+.lang a[aria-current="true"] { background: var(--green); color: #fff; }
+.lang a:hover:not([aria-current="true"]) { color: var(--gold-600); }
 
 /* ------------------------------- hero ----------------------------------- */
-.hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(120% 120% at 80% -10%, var(--teal) 0%, var(--teal-700) 45%, var(--teal-900) 100%); }
+.hero { position: relative; overflow: hidden; color: #f7f2e8; background: radial-gradient(130% 120% at 85% -10%, #3a352b 0%, var(--charcoal) 45%, var(--charcoal-900) 100%); }
 .hero .pattern { opacity: 0.16; }
-.hero__glow { position: absolute; inset-block-start: -20%; inset-inline-end: -10%; inline-size: 40rem; block-size: 40rem; background: radial-gradient(circle, rgba(187, 150, 97, 0.4), transparent 62%); filter: blur(10px); z-index: 0; pointer-events: none; }
+.hero__glow { position: absolute; inset-block-start: -20%; inset-inline-end: -8%; inline-size: 40rem; block-size: 40rem; background: radial-gradient(circle, rgba(184, 147, 90, 0.42), transparent 62%); filter: blur(10px); z-index: 0; pointer-events: none; }
 .hero__grid { position: relative; z-index: 1; display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; padding-block: clamp(3rem, 7vw, 5.5rem); }
-@media (min-width: 940px) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; } }
+@media (min-width: 940px) { .hero__grid { grid-template-columns: 1.1fr 0.9fr; } }
 .hero__eyebrow { color: var(--gold-200); }
 .hero__eyebrow::before { background: linear-gradient(90deg, var(--gold-200), transparent); }
 .hero h1 { font-size: var(--step-4); margin-block: 0.8rem 1rem; }
-.hero__sub { font-size: var(--step-1); color: rgba(255, 255, 255, 0.9); font-weight: 500; max-inline-size: 34rem; }
+.hero__sub { font-size: var(--step-1); color: rgba(247, 242, 232, 0.9); font-weight: 500; max-inline-size: 34rem; }
 .hero__cta { margin-block-start: 1.8rem; }
-.hero__hint { margin-block-start: 0.9rem; font-size: var(--step--1); color: rgba(255, 255, 255, 0.8); display: inline-flex; align-items: center; gap: 0.45rem; }
+.hero__hint { margin-block-start: 0.9rem; font-size: var(--step--1); color: rgba(247, 242, 232, 0.82); display: inline-flex; align-items: center; gap: 0.45rem; }
 .hero__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-block-start: 1.6rem; }
-.chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18); font-size: var(--step--1); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(231, 213, 177, 0.25); font-size: var(--step--1); font-weight: 600; }
 .chip svg { inline-size: 1rem; block-size: 1rem; color: var(--gold-200); }
 
 /* hero phone + qr */
@@ -218,23 +221,38 @@ html.is-android .store-badge[data-store="android"] {
 .hero__qr { position: absolute; inset-block-end: 0.5rem; inset-inline-start: 0; display: none; }
 @media (min-width: 940px) { html.is-desktop .hero__qr { display: block; } }
 
-/* floating hero phone (source screenshots already include a device frame) */
-.phone--floaty { animation: floaty 6s ease-in-out infinite; }
+/* ------------------------- device (phone) frame ------------------------- */
+/* The new screenshots are frameless, so we wrap them in a CSS device bezel. */
+.device {
+  position: relative; flex: none;
+  border-radius: 2.6rem; padding: 0.4rem;
+  background: linear-gradient(150deg, #40392e, #14110c);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 34px 60px -26px rgba(23, 20, 15, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.device::after {
+  content: ""; position: absolute; inset-block-start: 0.95rem; inset-inline: 0; margin-inline: auto;
+  inline-size: 26%; block-size: 0.52rem; border-radius: 999px;
+  background: #0a0908; z-index: 3; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+.device img { border-radius: 2.25rem; display: block; inline-size: 100%; }
+.device--hero { inline-size: min(74vw, 288px); rotate: -3deg; }
+.device--floaty { animation: floaty 6s ease-in-out infinite; }
 @keyframes floaty { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
-@media (prefers-reduced-motion: reduce) { .phone--floaty { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .device--floaty { animation: none; } }
 
 /* qr tile */
 .qr { display: inline-grid; place-items: center; padding: 0.6rem; background: #fff; border-radius: 14px; box-shadow: var(--shadow-md); }
 .qr svg { inline-size: 108px; block-size: 108px; }
-.qr__cap { display: block; margin-block-start: 0.4rem; font-size: 10.5px; font-weight: 600; color: #0f1613; text-align: center; max-inline-size: 120px; }
+.qr__cap { display: block; margin-block-start: 0.4rem; font-size: 10.5px; font-weight: 600; color: #211e18; text-align: center; max-inline-size: 120px; }
 
 /* ------------------------------ trust bar ------------------------------- */
 .trust { background: var(--card); border-block: 1px solid var(--line); }
 .trust__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 1rem; padding-block: clamp(1.8rem, 3vw, 2.4rem); }
 @media (min-width: 760px) { .trust__grid { grid-template-columns: repeat(4, 1fr); } }
 .trust__item { display: flex; gap: 0.75rem; align-items: flex-start; }
-.trust__ic { flex: none; inline-size: 2.4rem; block-size: 2.4rem; display: grid; place-items: center; border-radius: 12px; background: color-mix(in srgb, var(--teal) 12%, transparent); color: var(--teal); }
-@media (prefers-color-scheme: dark) { .trust__ic { color: var(--gold); } }
+.trust__ic { flex: none; inline-size: 2.4rem; block-size: 2.4rem; display: grid; place-items: center; border-radius: 12px; background: color-mix(in srgb, var(--green) 12%, transparent); color: var(--green); }
+@media (prefers-color-scheme: dark) { .trust__ic { color: var(--gold); background: color-mix(in srgb, var(--gold) 15%, transparent); } }
 .trust__ic svg { inline-size: 1.3rem; block-size: 1.3rem; }
 .trust__v { display: block; font-weight: 800; }
 .trust__l { display: block; font-size: var(--step--1); color: var(--muted); }
@@ -245,14 +263,14 @@ html.is-android .store-badge[data-store="android"] {
 .split__media { position: relative; display: flex; justify-content: center; }
 .checklist { list-style: none; padding: 0; display: grid; gap: 0.9rem; margin-block-start: 1.4rem; }
 .checklist li { display: flex; gap: 0.7rem; align-items: flex-start; font-weight: 500; }
-.checklist svg { flex: none; inline-size: 1.4rem; block-size: 1.4rem; color: var(--teal); margin-block-start: 0.15rem; }
+.checklist svg { flex: none; inline-size: 1.4rem; block-size: 1.4rem; color: var(--green); margin-block-start: 0.15rem; }
 @media (prefers-color-scheme: dark) { .checklist svg { color: var(--gold); } }
 
 /* backdrop card behind showcase phones */
-.media-card { position: relative; padding: clamp(1.5rem, 4vw, 3rem); border-radius: var(--radius-lg); background: linear-gradient(160deg, color-mix(in srgb, var(--teal) 8%, var(--card)), var(--card)); border: 1px solid var(--line); box-shadow: var(--shadow-md); overflow: hidden; }
-.media-card .pattern { opacity: 0.08; }
-.media-card img { position: relative; z-index: 1; }
-.media-card--warm { background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 16%, var(--card)), var(--card)); }
+.media-card { position: relative; padding: clamp(1.6rem, 4vw, 3rem); border-radius: var(--radius-lg); background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 15%, var(--card)), var(--card)); border: 1px solid var(--line); box-shadow: var(--shadow-md); overflow: hidden; display: flex; justify-content: center; }
+.media-card .pattern { opacity: 0.1; }
+.media-card .device { position: relative; z-index: 1; inline-size: min(68vw, 250px); }
+.media-card--warm { background: linear-gradient(160deg, color-mix(in srgb, var(--green) 12%, var(--card)), var(--card)); }
 
 /* ------------------------- content sections ----------------------------- */
 .content-band--tint { background: var(--paper-2); }
@@ -266,13 +284,13 @@ html.is-android .store-badge[data-store="android"] {
   padding: 1.6rem 1.5rem; box-shadow: var(--shadow-sm);
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
-.feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
-.feature__ic { inline-size: 3rem; block-size: 3rem; display: grid; place-items: center; border-radius: 14px; margin-block-end: 1rem; background: linear-gradient(150deg, color-mix(in srgb, var(--teal) 90%, #000), var(--teal-700)); color: #fff; box-shadow: 0 10px 22px -12px rgba(0, 102, 84, 0.8); }
+.feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); }
+.feature__ic { inline-size: 3rem; block-size: 3rem; display: grid; place-items: center; border-radius: 14px; margin-block-end: 1rem; background: linear-gradient(150deg, var(--gold), var(--gold-600)); color: #241a09; box-shadow: 0 10px 22px -12px rgba(184, 147, 90, 0.85); }
 .feature__ic svg { inline-size: 1.55rem; block-size: 1.55rem; }
 .feature h3 { font-size: var(--step-1); }
 .feature p { margin-block-start: 0.5rem; color: var(--muted); font-size: var(--step--1); }
 .feature--soon { position: relative; }
-.feature--soon::after { content: attr(data-soon); position: absolute; inset-block-start: 1.2rem; inset-inline-end: 1.2rem; font-size: 10.5px; font-weight: 800; color: var(--gold-600); background: color-mix(in srgb, var(--gold) 18%, transparent); padding: 0.15rem 0.55rem; border-radius: 999px; }
+.feature--soon::after { content: attr(data-soon); position: absolute; inset-block-start: 1.2rem; inset-inline-end: 1.2rem; font-size: 10.5px; font-weight: 800; color: var(--gold-600); background: color-mix(in srgb, var(--gold) 20%, transparent); padding: 0.15rem 0.55rem; border-radius: 999px; }
 
 /* -------------------------------- faq ----------------------------------- */
 .faq { max-inline-size: 46rem; margin-inline: auto; display: grid; gap: 0.7rem; }
@@ -281,27 +299,35 @@ html.is-android .store-badge[data-store="android"] {
 .faq summary::-webkit-details-marker { display: none; }
 /* Keep the focus ring inside the clipped (overflow:hidden) details box. */
 .faq summary:focus-visible { outline-offset: -3px; border-radius: 10px; }
-.faq summary .faq__plus { flex: none; inline-size: 1.3rem; block-size: 1.3rem; color: var(--teal); transition: transform 0.2s ease; }
-@media (prefers-color-scheme: dark) { .faq summary .faq__plus { color: var(--gold); } }
+.faq summary .faq__plus { flex: none; inline-size: 1.3rem; block-size: 1.3rem; color: var(--gold-600); transition: transform 0.2s ease; }
 .faq details[open] summary .faq__plus { transform: rotate(45deg); }
 .faq details > p { padding-block-end: 1.1rem; color: var(--muted); margin-block-start: -0.2rem; }
 
+/* --------------------------- literature band ---------------------------- */
+.lit { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--green-900), var(--green-700)); color: #f4efe4; text-align: center; }
+.lit .pattern { opacity: 0.15; }
+.lit__inner { position: relative; z-index: 1; max-inline-size: 44rem; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.lit__mark { margin-block-end: 0.6rem; }
+.lit__eyebrow { color: var(--gold-200); }
+.lit__eyebrow::before { display: none; }
+.lit .lead { color: rgba(244, 239, 228, 0.9); }
+
 /* ------------------------------ cta band -------------------------------- */
-.cta-band { position: relative; overflow: hidden; color: #fff; background: radial-gradient(120% 140% at 20% 0%, var(--teal) 0%, var(--teal-700) 55%, var(--teal-900) 100%); text-align: center; }
+.cta-band { position: relative; overflow: hidden; color: #f7f2e8; background: radial-gradient(130% 140% at 20% 0%, #3a352b 0%, var(--charcoal) 55%, var(--charcoal-900) 100%); text-align: center; }
 .cta-band .pattern { opacity: 0.16; }
 .cta-band__inner { position: relative; z-index: 1; max-inline-size: 42rem; margin-inline: auto; }
 .cta-band h2 { font-size: var(--step-3); }
-.cta-band p { margin-block: 0.9rem 1.8rem; font-size: var(--step-1); color: rgba(255, 255, 255, 0.9); }
+.cta-band p { margin-block: 0.9rem 1.8rem; font-size: var(--step-1); color: rgba(247, 242, 232, 0.9); }
 .cta-band .stores { justify-content: center; }
 
 /* ------------------------------- footer --------------------------------- */
-.site-footer { background: var(--teal-900); color: rgba(255, 255, 255, 0.86); padding-block: clamp(2.5rem, 5vw, 3.5rem); }
-.site-footer .brand { color: #fff; }
+.site-footer { background: var(--charcoal-900); color: rgba(247, 242, 232, 0.86); padding-block: clamp(2.5rem, 5vw, 3.5rem); }
+.site-footer .brand { color: #f7f2e8; }
 .site-footer__top { display: grid; gap: 1.6rem; align-items: start; }
 @media (min-width: 760px) { .site-footer__top { grid-template-columns: 1.5fr 1fr; } }
-.site-footer__tag { color: rgba(255, 255, 255, 0.72); margin-block-start: 0.8rem; max-inline-size: 34rem; font-size: var(--step--1); }
+.site-footer__tag { color: rgba(247, 242, 232, 0.72); margin-block-start: 0.8rem; max-inline-size: 34rem; font-size: var(--step--1); }
 .site-footer__links { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-.site-footer__bottom { margin-block-start: 2rem; padding-block-start: 1.4rem; border-block-start: 1px solid rgba(255, 255, 255, 0.14); font-size: var(--step--1); color: rgba(255, 255, 255, 0.6); display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; justify-content: space-between; }
+.site-footer__bottom { margin-block-start: 2rem; padding-block-start: 1.4rem; border-block-start: 1px solid rgba(255, 255, 255, 0.14); font-size: var(--step--1); color: rgba(247, 242, 232, 0.6); display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; justify-content: space-between; }
 .site-footer a:hover { color: var(--gold-200); }
 
 /* ---------------------- scroll reveal (progressive) --------------------- */
@@ -316,6 +342,6 @@ html.is-android .store-badge[data-store="android"] {
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Skip-to-content link — first focusable element, revealed on focus (WCAG 2.4.1) */
-.skip-link { position: absolute; inset-block-start: 0; inset-inline-start: 0; z-index: 200; transform: translateY(-120%); background: var(--teal); color: #fff; font-weight: 700; padding: 0.7rem 1.1rem; border-end-end-radius: 12px; transition: transform 0.15s ease; }
+.skip-link { position: absolute; inset-block-start: 0; inset-inline-start: 0; z-index: 200; transform: translateY(-120%); background: var(--green); color: #fff; font-weight: 700; padding: 0.7rem 1.1rem; border-end-end-radius: 12px; transition: transform 0.15s ease; }
 .skip-link:focus { transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) { .skip-link { transition: none; } }

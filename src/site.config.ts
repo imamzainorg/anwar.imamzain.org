@@ -31,12 +31,15 @@ export const SITE = {
     logo: 'https://imamzain.org/logo.png',
   },
 
-  /** Brand palette derived from the app's visual identity. */
+  /** Brand palette derived from the app's visual identity (cream + gold + charcoal,
+   *  with the logo's emerald green as the accent). `primary` is used for the QR
+   *  colour and theme-color. */
   brand: {
-    primary: '#006654', // deep teal-green — app header & accents
-    primaryDark: '#004d3f',
-    secondary: '#bb9661', // gold / tan — pills, ornaments
-    secondaryDark: '#9a774a',
+    primary: '#007062', // emerald green (logo) — QR + theme-color
+    green: '#007062',
+    gold: '#b8935a', // primary accent
+    charcoal: '#2b2822', // dark bars / CTA / footer
+    cream: '#f2efe8', // surfaces
   },
 
   /** Ordered locales; `ar` is the default (served at "/"). */

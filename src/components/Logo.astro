@@ -1,47 +1,26 @@
 ---
 /**
- * Brand mark: a Rub-el-Hizb octagram (two overlapping squares) — a classic
- * Islamic star — rendered in gold with a radiant "lights" (أنوار) halo. Pure
- * inline SVG so it scales crisply and costs nothing to load.
+ * Brand mark — the official Anwar Sajjadiya logo (emerald + gold teardrop with
+ * a calligraphic spiral), extracted from the app with a transparent background
+ * so it sits on cream and charcoal alike. Served optimized via astro:assets.
  */
+import { Image } from 'astro:assets';
+import logo from '@/assets/logo.png';
+
 interface Props {
-  size?: number;
+  size?: number; // rendered height in px
   class?: string;
-  /** "onLight" (default) or "onTeal" for a filled teal tile background. */
-  variant?: 'onLight' | 'onTeal';
   title?: string;
 }
-const { size = 40, class: klass, variant = 'onLight', title } = Astro.props;
-const gid = 'lg' + Math.random().toString(36).slice(2, 8);
+const { size = 40, class: klass, title } = Astro.props;
+const width = Math.round(size * (logo.width / logo.height));
 ---
-<svg
-  class={klass}
-  width={size}
+<Image
+  src={logo}
+  alt={title ?? ''}
+  width={width}
   height={size}
-  viewBox="0 0 48 48"
-  role="img"
-  aria-hidden={title ? undefined : 'true'}
-  aria-label={title}
->
-  {title && <title>{title}</title>}
-  <defs>
-    <linearGradient id={`${gid}g`} x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#d8b878" />
-      <stop offset="1" stop-color="#a97f45" />
-    </linearGradient>
-  </defs>
-  {variant === 'onTeal' && <rect x="0" y="0" width="48" height="48" rx="11" fill="#00332a" />}
-  <!-- radiant rays -->
-  <g stroke={`url(#${gid}g)`} stroke-width="1.6" stroke-linecap="round" opacity="0.9">
-    <path d="M24 1.5v3.5M24 43v3.5M1.5 24h3.5M43 24h3.5M8 8l2.5 2.5M37.5 37.5 40 40M40 8l-2.5 2.5M10.5 37.5 8 40" />
-  </g>
-  <!-- octagram: two overlapping squares -->
-  <g fill={`url(#${gid}g)`}>
-    <polygon points="24,7 41,24 24,41 7,24" />
-    <polygon points="12,12 36,12 36,36 12,36" />
-  </g>
-  <!-- inner facet + center -->
-  <polygon points="24,13 35,24 24,35 13,24" fill="#00332a" opacity="0.92" />
-  <polygon points="24,16.5 31.5,24 24,31.5 16.5,24" fill={`url(#${gid}g)`} />
-  <circle cx="24" cy="24" r="2.4" fill="#00332a" />
-</svg>
+  class={klass}
+  loading="eager"
+  densities={[1, 2]}
+/>
