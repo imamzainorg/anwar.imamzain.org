@@ -3,7 +3,7 @@
 A standalone, conversion‑focused landing page for the **Anwar Sajjadiya** mobile app
 (أنوار سجادية) — the integrated encyclopedia of Imam Zayn al‑Abidin, ʿAli ibn
 al‑Husayn as‑Sajjad (عليه السلام), published by the Imam Zayn al‑Abidin (as)
-Foundation. Built to live on its own subdomain, e.g. `anwar-sajjadiya.imamzain.org`.
+Foundation. Built to live on its own subdomain, e.g. `anwar.imamzain.org`.
 
 Its single job is to convert visitors into app downloads.
 
@@ -21,11 +21,14 @@ Its single job is to convert visitors into app downloads.
   store as the primary button with a "recommended" pill; desktop additionally shows
   a **scan‑to‑download QR** (generated at build time, no client JS). Scanning it on a
   phone (`?go=1`) forwards straight to the correct store.
-- **Brand identity from the app.** Warm cream surfaces, gold `#b8935a` as the primary
-  accent, charcoal `#2b2822` bars/CTA and the logo's emerald `#007062` as an accent —
-  with the app's real emerald‑and‑gold logo (extracted from the app, transparent).
-  Frameless app screenshots are shown in CSS device mockups; subtle Islamic geometry;
-  light & dark themes mirroring the app.
+- **Brand identity from the app.** The landing mirrors the app's real UI language:
+  warm cream surfaces, luminous gold‑gradient accents (`#e7d494 → #bd9a54`, the app's
+  squircle icons), olive/sage cards `#d9d5c1` with thin outlines, floating charcoal
+  `#2b2822` pill bars (header = the app's top bar, features = its navigation sheet),
+  and the home screen's dotted‑diamond ornaments. The logo's emerald `#007062` is
+  reserved for the logo artwork itself, as in the app. Frameless app screenshots are
+  shown in CSS device mockups; subtle Islamic geometry; light & dark themes mirroring
+  the app.
 
 ## Develop
 
@@ -61,9 +64,9 @@ font/runtime dependency.
 
 1. Import this directory as a new Vercel project (framework preset **Astro**,
    detected via `vercel.json`; output `dist`).
-2. Add the domain `anwar-sajjadiya.imamzain.org` in **Settings → Domains** and point
+2. Add the domain `anwar.imamzain.org` in **Settings → Domains** and point
    the subdomain's CNAME at Vercel.
-3. Set env var `SITE_URL=https://anwar-sajjadiya.imamzain.org` (Production) so
+3. Set env var `SITE_URL=https://anwar.imamzain.org` (Production) so
    canonicals, `hreflang`, sitemap and JSON‑LD use the final origin, then deploy.
 
 `vercel.json` sets long‑lived immutable caching for `/_astro/*` and `/fonts/*` and
