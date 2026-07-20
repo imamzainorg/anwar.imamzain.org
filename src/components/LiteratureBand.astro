@@ -1,8 +1,9 @@
 ---
 /**
- * The biography / "Imam in Arabic literature" section — an ornamental centered
- * band (no screenshot) that varies the page rhythm and keeps the payload light.
- * All styling lives in global.css (.lit*).
+ * The biography / "Imam in Arabic literature" section — styled after the app's
+ * "تراث الامام" heritage cards: an olive plaque with a thin outline, a faint
+ * geometric watermark and the gold dotted ornament at its edge. No screenshot,
+ * which varies the page rhythm and keeps the payload light (.lit* in CSS).
  */
 interface Props {
   eyebrow: string;
@@ -12,10 +13,14 @@ interface Props {
 const { eyebrow, title, body } = Astro.props;
 ---
 <section class="section lit">
-  <div class="pattern"></div>
-  <div class="wrap lit__inner reveal">
-    <span class="eyebrow lit__eyebrow">{eyebrow}</span>
-    <h2 class="section-title">{title}</h2>
-    <p class="lead">{body}</p>
+  <div class="wrap">
+    <div class="lit__card reveal">
+      <div class="pattern"></div>
+      <div class="lit__inner">
+        <span class="eyebrow">{eyebrow}</span>
+        <h2 class="section-title">{title}</h2>
+        <p class="lead">{body}</p>
+      </div>
+    </div>
   </div>
 </section>

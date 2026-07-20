@@ -19,25 +19,31 @@ const ICONS: Record<string, string> = {
 };
 const SOON: Record<Locale, string> = { ar: 'قريباً', en: 'Soon', fa: 'به‌زودی' };
 ---
+{/* The app's navigation drawer, re-imagined: a charcoal sheet with a pull
+    handle and a grid of gold-gradient squircle icons. */}
 <section class="section" id="features">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow"><Icon name="sparkle" size={16} /> {c.brand.name}</span>
-      <h2 class="section-title">{c.featuresHeading.title}</h2>
-      <p class="lead">{c.featuresHeading.subtitle}</p>
-    </div>
+    <div class="features-sheet reveal">
+      <div class="pattern"></div>
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="section-head">
+        <span class="eyebrow">{c.brand.name}</span>
+        <h2 class="section-title">{c.featuresHeading.title}</h2>
+        <p class="lead">{c.featuresHeading.subtitle}</p>
+      </div>
 
-    <div class="feature-grid">
-      {c.features.map((f) => (
-        <article
-          class={`feature reveal${f.id === 'library' ? ' feature--soon' : ''}`}
-          data-soon={f.id === 'library' ? SOON[locale] : undefined}
-        >
-          <span class="feature__ic"><Icon name={ICONS[f.id] ?? 'sparkle'} /></span>
-          <h3>{f.title}</h3>
-          <p>{f.description}</p>
-        </article>
-      ))}
+      <div class="feature-grid">
+        {c.features.map((f) => (
+          <article
+            class={`feature${f.id === 'library' ? ' feature--soon' : ''}`}
+            data-soon={f.id === 'library' ? SOON[locale] : undefined}
+          >
+            <span class="feature__ic"><Icon name={ICONS[f.id] ?? 'sparkle'} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.description}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>

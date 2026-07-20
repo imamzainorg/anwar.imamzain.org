@@ -10,16 +10,20 @@ const { locale } = Astro.props;
 const c = CONTENT[locale];
 const icons = ['gift', 'sparkle', 'shield-check', 'moon'];
 ---
-<section class="trust" aria-label="Trust">
-  <div class="wrap trust__grid">
-    {c.trust.items.map((item, i) => (
-      <div class="trust__item">
-        <span class="trust__ic"><Icon name={icons[i] ?? 'check'} /></span>
-        <span>
-          <span class="trust__v">{item.value}</span>
-          <span class="trust__l">{item.label}</span>
-        </span>
-      </div>
-    ))}
+{/* One olive capsule with hairline dividers — the app's pill rows with
+    "value | value" metadata, plus its mini gold squircle icons. */}
+<section class="trust section--tight" aria-label="Trust">
+  <div class="wrap">
+    <div class="trust__band reveal">
+      {c.trust.items.map((item, i) => (
+        <div class="trust__item">
+          <span class="trust__ic"><Icon name={icons[i] ?? 'check'} /></span>
+          <span>
+            <span class="trust__v">{item.value}</span>
+            <span class="trust__l">{item.label}</span>
+          </span>
+        </div>
+      ))}
+    </div>
   </div>
 </section>

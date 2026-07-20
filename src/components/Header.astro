@@ -11,25 +11,28 @@ interface Props {
 const { locale } = Astro.props;
 const c = CONTENT[locale];
 ---
+{/* Floating charcoal pill — the app's top bar, hovering over the cream page. */}
 <header class="site-header">
-  <div class="wrap site-header__row">
-    <a class="brand" href="#top" aria-label={c.brand.name}>
-      <Logo class="brand__mark" size={38} title={c.brand.name} />
-      <span class="brand__name">{c.brand.name}<small>{c.brand.nameLatin}</small></span>
-    </a>
-
-    <nav class="nav" aria-label="Primary">
-      <a href="#features">{c.nav.features}</a>
-      <a href="#content">{c.nav.content}</a>
-      <a href="#faq">{c.nav.faq}</a>
-    </nav>
-
-    <div class="header-actions">
-      <LangSwitch locale={locale} />
-      <a class="btn btn--primary btn--sm" href="#download">
-        <Icon name="download" size={17} />
-        <span>{c.nav.download}</span>
+  <div class="wrap">
+    <div class="site-header__row">
+      <a class="brand" href="#top" aria-label={c.brand.name}>
+        <Logo class="brand__mark" size={38} title={c.brand.name} />
+        <span class="brand__name">{c.brand.name}<small>{c.brand.nameLatin}</small></span>
       </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#features">{c.nav.features}</a>
+        <a href="#content">{c.nav.content}</a>
+        <a href="#faq">{c.nav.faq}</a>
+      </nav>
+
+      <div class="header-actions">
+        <LangSwitch locale={locale} />
+        <a class="btn btn--primary btn--sm" href="#download">
+          <Icon name="download" size={17} />
+          <span>{c.nav.download}</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>

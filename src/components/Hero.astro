@@ -18,12 +18,12 @@ const c = CONTENT[locale];
   <div class="hero__glow"></div>
   <div class="wrap hero__grid">
     <div class="hero__copy">
-      <span class="eyebrow hero__eyebrow">{c.hero.eyebrow}</span>
+      <span class="eyebrow">{c.hero.eyebrow}</span>
       <h1>{c.hero.title}</h1>
       <p class="hero__sub">{c.hero.subtitle}</p>
 
       <div class="hero__cta">
-        <StoreButtons locale={locale} onDark />
+        <StoreButtons locale={locale} />
         <p class="hero__hint"><Icon name="download" size={16} /> {c.hero.ctaHint}</p>
       </div>
 

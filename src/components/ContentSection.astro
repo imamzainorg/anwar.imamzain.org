@@ -12,15 +12,14 @@ interface Props {
   image: ImageMetadata;
   alt: string;
   reversed?: boolean;
-  warm?: boolean;
   tint?: boolean;
 }
-const { eyebrow, title, body, icon, image, alt, reversed = false, warm = false, tint = false } = Astro.props;
+const { eyebrow, title, body, icon, image, alt, reversed = false, tint = false } = Astro.props;
 ---
 <section class={`section content-band${tint ? ' content-band--tint' : ''}`}>
   <div class={`wrap split${reversed ? ' split--rev' : ''}`}>
     <div class="split__media reveal">
-      <div class={`media-card${warm ? ' media-card--warm' : ''}`}>
+      <div class="media-card">
         <div class="pattern"></div>
         <PhoneFrame image={image} alt={alt} sizes="(max-width: 900px) 58vw, 250px" />
       </div>

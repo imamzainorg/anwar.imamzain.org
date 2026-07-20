@@ -1,9 +1,9 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config'
+import sitemap from '@astrojs/sitemap'
 
 // Public origin of the deployed site. Override in CI/Vercel with SITE_URL.
-const site = process.env.SITE_URL || 'https://anwar-sajjadiya.imamzain.org';
+const site = process.env.SITE_URL || 'https://anwar.imamzain.org'
 
 // https://astro.build/config
 export default defineConfig({
@@ -36,4 +36,4 @@ export default defineConfig({
     // Ship modern formats; Astro generates responsive variants at build time.
     responsiveStyles: true,
   },
-});
+})
