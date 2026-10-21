@@ -1,88 +1,29 @@
-# Anwar Sajjadiya — landing page
+# Anwar Sajjadiya — Landing Page
 
-A standalone, conversion‑focused landing page for the **Anwar Sajjadiya** mobile app
-(أنوار سجادية) — the integrated encyclopedia of Imam Zayn al‑Abidin, ʿAli ibn
-al‑Husayn as‑Sajjad (عليه السلام), published by the Imam Zayn al‑Abidin (as)
-Foundation. Built to live on its own subdomain, e.g. `anwar.imamzain.org`.
+The marketing landing page for the **Anwar Sajjadiya** mobile app (أنوار سجادية),
+the integrated encyclopedia of Imam Zayn al-Abidin, ʿAli ibn al-Husayn as-Sajjad
+(عليه السلام), published by the **Imam Zayn al-Abidin (as) Foundation**. It lives
+on its own subdomain, [anwar.imamzain.org](https://anwar.imamzain.org), and its
+single purpose is to convert visitors into app downloads.
 
-Its single job is to convert visitors into app downloads.
+## What it offers
 
-## Highlights
+- **Device-aware download CTA** — detects iOS, Android, or desktop and highlights
+  the matching app store; desktop visitors get a scan-to-download QR code that
+  forwards a phone straight to the correct store.
+- **Trilingual** — Arabic (`/`), English (`/en/`), and Farsi (`/fa/`), each with
+  its own copy, metadata, and keywords.
+- **Faithful brand identity** — mirrors the app's own visual language (warm cream
+  surfaces, gold-gradient accents, olive/sage cards, charcoal pill bars) with app
+  screenshots shown in device mockups, in both light and dark themes.
+- **Built for discovery** — full SEO with per-locale titles/descriptions,
+  `hreflang`, canonicals, Open Graph & Twitter cards, an i18n sitemap, and rich
+  JSON-LD structured data, plus an iOS smart app banner.
 
-- **Astro, static, ~zero JS.** No client framework. The only script is a ~0.5 KB
-  inline device sniffer. Pages are ~9 KB gzipped; images ship as responsive
-  AVIF/WebP via `astro:assets`.
-- **Trilingual + world‑class SEO.** Arabic (`/`), English (`/en/`), Farsi (`/fa/`)
-  with per‑locale titles/descriptions/keywords, `hreflang` (+ `x-default`),
-  canonicals, Open Graph & Twitter cards, an i18n sitemap, and JSON‑LD
-  (`SoftwareApplication`/`MobileApplication`, `Organization`, `WebSite`,
-  `BreadcrumbList`, `FAQPage`). iOS Safari smart‑app‑banner included.
-- **Device‑aware CTA.** Detects iOS / Android / desktop and highlights the matching
-  store as the primary button with a "recommended" pill; desktop additionally shows
-  a **scan‑to‑download QR** (generated at build time, no client JS). Scanning it on a
-  phone (`?go=1`) forwards straight to the correct store.
-- **Brand identity from the app.** The landing mirrors the app's real UI language:
-  warm cream surfaces, luminous gold‑gradient accents (`#e7d494 → #bd9a54`, the app's
-  squircle icons), olive/sage cards `#d9d5c1` with thin outlines, floating charcoal
-  `#2b2822` pill bars (header = the app's top bar, features = its navigation sheet),
-  and the home screen's dotted‑diamond ornaments. The logo's emerald `#007062` is
-  reserved for the logo artwork itself, as in the app. Frameless app screenshots are
-  shown in CSS device mockups; subtle Islamic geometry; light & dark themes mirroring
-  the app.
+## Scope & architecture
 
-## Develop
-
-```bash
-npm install
-npm run dev        # http://localhost:4321
-npm run build      # → dist/  (static)
-npm run preview
-```
-
-## Content & config
-
-- **Copy / translations:** `src/i18n/content.ts` — one typed `Content` object per
-  locale (identical shape). Section/feature `id`s are stable across locales.
-- **Links, colours, identity:** `src/site.config.ts` — store URLs, app ids,
-  publisher org, brand palette, locales.
-- **Canonical origin:** `astro.config.mjs` `site` (override at build with the
-  `SITE_URL` env var). Also update the `Sitemap:` line in `public/robots.txt`.
-
-## Social / icon assets
-
-`public/og/{ar,en,fa}.jpg` (1200×630), `public/apple-touch-icon.png` and `public/favicon.png` are
-pre‑generated (committed) — regenerate after a brand/screenshot change:
-
-```bash
-npm run og         # node scripts/make-og.mjs  (uses sharp; NOT part of the build)
-```
-
-They are generated locally rather than in CI so the Vercel build stays free of any
-font/runtime dependency.
-
-## Deploy to Vercel
-
-1. Import this directory as a new Vercel project (framework preset **Astro**,
-   detected via `vercel.json`; output `dist`).
-2. Add the domain `anwar.imamzain.org` in **Settings → Domains** and point
-   the subdomain's CNAME at Vercel.
-3. Set env var `SITE_URL=https://anwar.imamzain.org` (Production) so
-   canonicals, `hreflang`, sitemap and JSON‑LD use the final origin, then deploy.
-
-`vercel.json` sets long‑lived immutable caching for `/_astro/*` and `/fonts/*` and
-sensible security headers.
-
-## Project structure
-
-```
-src/
-  site.config.ts        store links, brand palette, locales
-  i18n/                 locale helpers + all copy (content.ts)
-  lib/                  jsonld.ts (structured data), screens.ts (image map)
-  styles/global.css     design system (logical props → RTL + LTR)
-  components/           Header, Hero, StoreButtons, Qr, Showcase, ContentSection,
-                        LiteratureBand, FeatureGrid, Faq, CtaBand, Footer, Seo, …
-  layouts/Base.astro    <html> + head + device script
-  pages/                index.astro (ar), en/index.astro, fa/index.astro
-scripts/make-og.mjs     social image + icon generator (sharp)
-```
+- A static site built with **Astro**, shipping near-zero JavaScript (only a tiny
+  inline device-detection script).
+- Responsive **AVIF/WebP** imagery generated at build time; social cards and
+  icons are pre-generated with `sharp`.
+- Deployed as static output (Vercel).
